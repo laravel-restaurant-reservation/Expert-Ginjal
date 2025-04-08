@@ -1,23 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DiagnoseController;
 
 Route::get( '/', function () {
 return view('landing');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+Route::get('/form', function () {
+    return view('form', ['title' => 'Form']);
+})->name('form');
 
-Route::get( '/about', function () {
-return view('about');
-});
+Route::get('diagnose', function () {
+    return view('diagnose', ['title' => 'Diagnosa']);
+})->name('diagnose');
 
-Route::get( '/blog', function () {
-return view('blog');
-});
-
-Route::get( '/contact', function () {
-return view('contact');
-});
+Route::post('diagnose/proses', [DiagnoseController::class, 'proses'])->name('diagnose.proses');
