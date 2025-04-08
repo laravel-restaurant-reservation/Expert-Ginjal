@@ -16,3 +16,5 @@ Route::get('diagnose', function () {
 })->name('diagnose');
 
 Route::post('diagnose/proses', [DiagnoseController::class, 'proses'])->name('diagnose.proses');
+
+Route::get('/hasil/export', [DiagnoseController::class, 'exportPDF'])->name('hasil.export');
