@@ -45,6 +45,10 @@
 
         <!-- Tombol -->
         <div class="text-center">
+            <a href="{{ route('hasil.export') }}"
+                class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow transition">
+                Download PDF
+            </a>
             <a href="{{ route('form') }}"
                class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow transition">
                 Kembali ke Formulir
