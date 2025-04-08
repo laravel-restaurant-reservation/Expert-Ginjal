@@ -1,5 +1,4 @@
 <!-- resources/views/kidney/form.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,17 +11,25 @@
     <div class="w-full max-w-5xl bg-white rounded-lg shadow-xl overflow-hidden">
         <!-- Header -->
         <div class="bg-blue-500 text-white text-center py-6">
-            <h1 class="text-2xl font-bold uppercase tracking-wide">Lorem Ipsum</h1>
+            <h1 class="text-2xl font-bold uppercase tracking-wide">Kidney Health Screening</h1>
         </div>
-
+        @if ($errors->any())
+        <div class="mb-4 p-4 bg-red-100 text-red-600 rounded">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach                    <!--ini buat kondisi kalau si isian harus ada -->
+            </ul>
+        </div>
+        @endif
         <!-- Form -->
-        <form id="kidney-screening-form" method="POST" action="{{ route('dashboard') }}" class="p-6 md:p-10">
+        <form method="POST" action="{{ route('diagnose.proses') }}" class="p-6 md:p-10"> <!-- Route Post ini untuk dikirimkan ke halaman 'hasil' dengan variabel diagnose.proses di web.phpnya -->
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Left Column -->
                 <div class="space-y-4">
                     @foreach ([
-                        'age' => 'Usia',
+                        'usia' => 'Usia',
                         'suhu_tubuh' => 'Suhu Tubuh',
                         'tekanan_darah' => 'Tekanan Darah',
                         'asam_urat' => 'Asam Urat',
@@ -32,8 +39,18 @@
                     ] as $id => $label)
                         <div>
                             <label for="{{ $id }}" class="block font-semibold text-gray-700 mb-1">{{ $label }}</label>
-                            <input type="{{ $id === 'age' ? 'number' : 'text' }}" id="{{ $id }}" name="{{ $id }}"
-                                   class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+                            @if ($id === 'warna_urine')
+                                <select id="{{ $id }}" name="{{ $id }}"
+                                        class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                    <option value="">-- Pilih --</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Gelap">Gelap</option>
+                                </select>
+                            @else
+                                <input type="number" step="any" id="{{ $id }}" name="{{ $id }}"
+                                       class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -45,19 +62,19 @@
                         'sering_berkemih' => 'Sering Berkemih',
                         'mudah_lelah' => 'Mudah Lelah',
                         'mual_muntah' => 'Mual dan Muntah',
-                        'riwayat_penyakit_ginjal' => 'Riwayat Penyakit Ginjal di Keluarga',
-                        'riwayat_penyakit_hipertensi' => 'Riwayat Penyakit Hipertensi',
-                        'riwayat_penyakit_diabetes' => 'Riwayat Penyakit Diabetes'
+                        'riwayat_ginjal' => 'Riwayat Penyakit Ginjal di Keluarga',
+                        'riwayat_hipertensi' => 'Riwayat Penyakit Hipertensi',
+                        'riwayat_diabetes' => 'Riwayat Penyakit Diabetes'
                     ] as $name => $label)
                         <div>
                             <label class="block font-semibold text-gray-700 mb-1">{{ $label }}</label>
                             <div class="flex space-x-6">
                                 <label class="inline-flex items-center">
-                                    <input type="radio" name="{{ $name }}" value="ya" class="text-blue-500">
+                                    <input type="radio" name="{{ $name }}" value="Ya" class="text-blue-500">
                                     <span class="ml-2">Ya</span>
                                 </label>
                                 <label class="inline-flex items-center">
-                                    <input type="radio" name="{{ $name }}" value="tidak" class="text-blue-500">
+                                    <input type="radio" name="{{ $name }}" value="Tidak" class="text-blue-500">
                                     <span class="ml-2">Tidak</span>
                                 </label>
                             </div>
@@ -66,7 +83,7 @@
                 </div>
             </div>
 
-            <!-- Footer -->
+            <!-- Submit Button -->
             <div class="mt-8">
                 <button type="submit"
                         class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md shadow transition">
