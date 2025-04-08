@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DiagnoseController extends Controller
 {
@@ -38,6 +39,27 @@ class DiagnoseController extends Controller
             ? "Kemungkinan gangguan ginjal. Disarankan konsultasi ke dokter."
             : "Tidak terindikasi gangguan ginjal berdasarkan data yang diberikan.";
 
-        return view('hasil', compact('hasil', 'data', 'skor')); // hasil, data, skor ini adalah variabel yang bisa dipanggil ke blade.php. jadi variabel ini menampung hasil dari proses diatas.
+        // Simpan ke session agar bisa diakses saat export PDF
+        session([
+            'hasil' => $hasil,
+            'data' => $data,
+            'skor' => $skor,
+        ]);
+
+        return view('hasil', compact('hasil', 'data', 'skor'));
+    }
+
+    public function exportPDF()
+    {
+        $hasil = session('hasil');
+        $data = session('data');
+        $skor = session('skor');
+
+        if (!$hasil || !$data || !$skor) {
+            return redirect()->route('form')->with('error', 'Tidak ada data diagnosa untuk di-export.');
+        }
+
+        $pdf = Pdf::loadView('hasil_pdf', compact('hasil', 'data', 'skor'))->setPaper('a4', 'portrait');
+        return $pdf->download('hasil_diagnosa.pdf');
     }
 }
