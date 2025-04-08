@@ -38,6 +38,6 @@ class DiagnoseController extends Controller
             ? "Kemungkinan gangguan ginjal. Disarankan konsultasi ke dokter."
             : "Tidak terindikasi gangguan ginjal berdasarkan data yang diberikan.";
 
-        return view('hasil', compact('hasil', 'data', 'skor'));
+        return view('hasil', compact('hasil', 'data', 'skor')); // hasil, data, skor ini adalah variabel yang bisa dipanggil ke blade.php. jadi variabel ini menampung hasil dari proses diatas.
     }
 }
