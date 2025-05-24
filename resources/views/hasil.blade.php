@@ -18,11 +18,65 @@
 
         <!-- Hasil Diagnosa -->
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-md">
-            <p class="text-lg text-gray-800 mb-1 font-semibold">{{ $hasil }}</p> <!-- $hasil dari DiagnoseController.php. liat aja di app/http/controller. nah disitu ada variable buat nampung hasil -->
+            <p class="text-lg text-gray-800 mb-1 font-semibold">{{ $hasil }}</p> 
+            <!-- $hasil dari DiagnoseController.php. liat aja di app/http/controller. nah disitu ada variable buat nampung hasil -->
             <p class="text-sm text-gray-700">Skor diagnosa Anda: <span class="font-bold text-blue-600">{{ $skor }}</span></p>
         </div>
 
         <!-- Data yang Dimasukkan -->
+         <!-- Ringkasan Fuzzy -->
+        <div class="mt-6">
+            <h2 class="text-xl font-semibold text-gray-700 mb-2">Ringkasan Fuzzyfikasi:</h2>
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full text-sm md:text-base border border-gray-300">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border px-4 py-2">Variabel</th>
+                            <th class="border px-4 py-2">Input</th>
+                            <th class="border px-4 py-2">Kategori</th>
+                            <th class="border px-4 py-2">Derajat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($fuzzy_summary as $item)
+                            <tr>
+                                <td class="border px-4 py-1">{{ $item['variabel'] }}</td>
+                                <td class="border px-4 py-1">{{ $item['input'] }}</td>
+                                <td class="border px-4 py-1">{{ $item['kategori'] }}</td>
+                                <td class="border px-4 py-1">{{ $item['derajat'] }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @if (!empty($rule_summary))
+            <div class="mt-6">
+                <h2 class="text-xl font-semibold text-gray-700 mb-2">Ringkasan Penerapan Aturan (Defuzzifikasi):</h2>
+                <div class="overflow-x-auto">
+                    <table class="table-auto w-full text-sm md:text-base border border-gray-300">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="border px-4 py-2">CF User (wi)</th>
+                                <th class="border px-4 py-2">CF Pakar (zi)</th>
+                                <th class="border px-4 py-2">Hasil (wi * zi)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($rule_summary as $rule)
+                                <tr>
+                                    <td class="border px-4 py-1">{{ $rule['wi'] }}</td>
+                                    <td class="border px-4 py-1">{{ $rule['zi'] }}</td>
+                                    <td class="border px-4 py-1">{{ $rule['hasil'] }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endif
+
         <div>
             <h2 class="text-xl font-semibold text-gray-700 mb-2">Data yang Anda Masukkan:</h2>
             <ul class="list-disc list-inside text-gray-700 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm md:text-base">

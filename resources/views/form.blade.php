@@ -152,10 +152,14 @@
             <h2 class="text-xl font-semibold border-b pb-1 pt-6">Gejala Fisik</h2>
 
             @foreach ([
-                'nyeri_pinggang' => 'Nyeri Pinggang',
                 'sering_berkemih' => 'Sering Berkemih',
+                'nyeri_pinggang' => 'Nyeri Pinggang',
+                'nyeri_buang_air_kecil' => 'Nyeri Buang Air Kecil',
+                'ruam_kulit' => 'Raum Kulit',
                 'mudah_lelah' => 'Mudah Lelah',
-                'mual_muntah' => 'Mual atau Muntah'
+                'mual_muntah' => 'Mual atau Muntah',
+                'sesak_nafas' => 'Sesak Nafas',
+                'nyeri_pinggul' => 'Nyeri Pinggul'
             ] as $name => $label)
                 <div class="mb-4">
                     <label class="block font-medium">{{ $label }}</label>
