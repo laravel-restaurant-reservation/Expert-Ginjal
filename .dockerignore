@@ -1,0 +1,34 @@
+# Node modules
+node_modules
+resources/js/node_modules
+
+# Laravel cache
+bootstrap/cache/*
+!bootstrap/cache/.gitignore
+
+# Logs
+storage/*.log
+storage/logs
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+!storage/framework/cache/.gitignore
+!storage/framework/sessions/.gitignore
+!storage/framework/views/.gitignore
+
+# Composer dependencies
+vendor
+!vendor/.gitignore
+
+# Git and system files
+.git
+.gitignore
+.env
+.env.*.backup
+*.env.backup
+.DS_Store
+*.swp
+
+# Tests
+phpunit.xml
+tests
