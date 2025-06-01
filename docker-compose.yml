@@ -26,28 +26,28 @@ services:
     networks:
       - laravel
 
-  db:
-    image: mysql:8
-    container_name: mysql-db
-    environment:
-      MYSQL_DATABASE: db_sispak_cloud
-      MYSQL_ROOT_PASSWORD: root 
-      MYSQL_USER: cloud-app
-      MYSQL_PASSWORD: secret
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - laravel
+  # db:
+  #   image: mysql:8
+  #   container_name: mysql-db
+  #   environment:
+  #     MYSQL_DATABASE: db_sispak_cloud
+  #     MYSQL_ROOT_PASSWORD: root 
+  #     MYSQL_USER: cloud-app
+  #     MYSQL_PASSWORD: secret
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+  #   networks:
+  #     - laravel
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8080
-    networks:
-      - laravel
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8081:8080
+  #   networks:
+  #     - laravel
 
 volumes:
   db_data:
