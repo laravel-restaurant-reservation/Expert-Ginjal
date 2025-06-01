@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libmcrypt-dev \
     nano \
-    libcurl4-openssl-dev \
+    libcurl4-openssl-dev \ 
     && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
 
 # Install Composer
