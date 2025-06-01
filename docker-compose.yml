@@ -24,7 +24,7 @@ services:
     depends_on:
       - app
     networks:
-      - laravel 
+      - laravel
 
   # db:
   #   image: mysql:8
