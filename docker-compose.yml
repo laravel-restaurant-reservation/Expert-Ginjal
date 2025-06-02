@@ -8,8 +8,6 @@ services:
     container_name: cloud-laravel-app
     volumes:
       - .:/var/www
-    depends_on:
-      - db
     networks:
       - laravel
 
@@ -48,10 +46,7 @@ services:
   #     - 8081:8080
   #   networks:
   #     - laravel
-
-volumes:
-  db_data:
-
+  
 networks:
   laravel:
     driver: bridge
