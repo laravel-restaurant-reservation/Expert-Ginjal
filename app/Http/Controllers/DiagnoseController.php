@@ -332,7 +332,13 @@ class DiagnoseController extends Controller
             return redirect()->route('form')->with('error', 'Tidak ada data diagnosa untuk di-export.');
         }
 
+        # $pdf = Pdf::loadView('hasil_pdf', compact('hasil', 'data', 'skor'))->setPaper('a4', 'portrait');
+        # return $pdf->download('hasil_diagnosa.pdf');
+        
         $pdf = Pdf::loadView('hasil_pdf', compact('hasil', 'data', 'skor'))->setPaper('a4', 'portrait');
-        return $pdf->download('hasil_diagnosa.pdf');
+        $filename = 'hasil_diagnosa_' . now()->timestamp . '.pdf';
+        Storage::disk('s3')->put("diagnoses/$filename", $pdf->output());
+
+        return redirect()->route('form')->with('success', "Hasil telah disimpan ke S3 sebagai $filename");
     }
 }
