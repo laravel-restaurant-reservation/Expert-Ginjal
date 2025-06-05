@@ -19,11 +19,8 @@ Route::post('diagnose/proses', [DiagnoseController::class, 'proses'])->name('dia
 
 Route::get('/hasil/export', [DiagnoseController::class, 'exportPDF'])->name('hasil.export');
 
-Route::get('/test-upload', function () {
-    $pdfContent = file_get_contents(public_path('dummy.pdf'));
-    $path = 'reports/test_' . now()->timestamp . '.pdf';
-
-    Storage::disk('s3')->put($path, $pdfContent);
-
+Route::get('/cdn-test', function () {
+    $path = 'demo_' . now()->timestamp . '.txt';
+    Storage::disk('s3')->put($path, 'Hello from Laravel!');
     return Storage::disk('s3')->url($path);
 });
