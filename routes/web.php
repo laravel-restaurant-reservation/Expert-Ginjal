@@ -23,6 +23,6 @@ Route::get('/hasil/export', [DiagnoseController::class, 'exportPDF'])->name('has
 Route::get('/cdn-test', function () {
     $path = 'demo_' . now()->timestamp . '.txt';
     Storage::disk('s3')->put($path, 'Hello from Laravel!');
-    return Storage::disk('s3')->url($path);
+    return Storage::disk('s3')->url($path, $pdfContent, 'public');
 });
 
