@@ -20,9 +20,9 @@ Route::post('diagnose/proses', [DiagnoseController::class, 'proses'])->name('dia
 Route::get('/hasil/export', [DiagnoseController::class, 'exportPDF'])->name('hasil.export');
 
 
-Route::get('/cdn-test', function () {
-    $path = 'demo_' . now()->timestamp . '.txt';
-    Storage::disk('s3')->put($path, 'Hello from Laravel!');
-    return Storage::disk('s3')->temporaryUrl($path, now()->addMinutes(5));
-});
+// Route::get('/cdn-test', function () {
+//     $path = 'demo_' . now()->timestamp . '.txt';
+//     Storage::disk('s3')->put($path, 'Hello from Laravel!');
+//     return Storage::disk('s3')->temporaryUrl($path, now()->addMinutes(5));
+// });
 
